@@ -3,6 +3,7 @@ article.md
   padding: 1rem
   color: var(--text-p1)
   line-height: 1.7
+  word-break: break-word
 
 article.md.excerpt
   p
@@ -29,7 +30,7 @@ article.md.content
         opacity: 1
 
 // titles
-article.md
+article.md.content
   a.headerlink:before
     opacity: 0
     content: '#'
@@ -45,15 +46,15 @@ article.md
   h4,h5,h6
     font-weight: 500
   h1+h2
-    margin-top: 0
+    margin-top: -0.5rem
   h2+h3
-    margin-top: 0
+    margin-top: -1rem
   h3+h4
-    margin-top: 0
+    margin-top: -1rem
   h4+h5
-    margin-top: 0
+    margin-top: -1rem
   h5+h6
-    margin-top: 0
+    margin-top: -1rem
 
 // a
 article.md
@@ -92,10 +93,11 @@ article.md>div
 article.md blockquote
   margin: 1rem 0
   padding: 1rem
-  background: var(--block)
-  border-left: 3px solid $color-theme
-  border-radius: 0 $border-block $border-block 0
+  background: var(--card)
+  border-left: 4px solid $color-theme
+  border-radius: $border-block
   color: var(--text-p2)
+  box-shadow: $boxshadow-card
   p
     margin: 0.5em 0
     font-size: $fs-14
