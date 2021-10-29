@@ -1,6 +1,6 @@
 ######## Stellar info ########
 stellar:
-  version: '1.4.1'
+  version: '1.5.2'
   homepage: 'https://xaoxuu.com/wiki/stellar/'
   repo: 'https://github.com/xaoxuu/hexo-theme-stellar'
   cdn_css: # Use cdn links instead of /css/main.css
@@ -56,10 +56,14 @@ sidebar:
 
 
 
+######## Main ########
+breadcrumb:
+  home: config.title # config.title / config.author / home or custom content
+
 ######## Article ########
 article:
   # 如果没有指定封面，是否根据 tags 作为关键词搜索封面？
-  auto_cover: true # search from https://source.unsplash.com/
+  auto_cover: false # search from https://source.unsplash.com/
   # 如果没有指定 excerpt 和 description，将自动取多长的内容作为文章摘要？
   auto_excerpt: 200
   # 分类颜色
@@ -196,8 +200,8 @@ plugins:
   # swiper
   swiper:
     enable: true
-    css: https://unpkg.com/swiper/swiper-bundle.min.css
-    js: https://unpkg.com/swiper/swiper-bundle.min.js
+    css: https://unpkg.com/swiper@6/swiper-bundle.min.css
+    js: https://unpkg.com/swiper@6/swiper-bundle.min.js
   # issues api
   sitesjs: /js/plugins/sites.js
   friendsjs: /js/plugins/friends.js
@@ -227,10 +231,10 @@ plugins:
     scale: 1 # 0.1~1
 
 style:
-  darkmode: auto # set 'auto' to enable, set 'false' to disable
+  darkmode: auto # auto / always / false
   theme:
     light: '#f8f8f8'
-    dark: '#20252B'
+    dark: '#313438'
   animated_avatar:
     animate: auto # auto, always
     background: https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp
