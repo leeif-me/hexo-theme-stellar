@@ -179,6 +179,14 @@ tag_plugins:
   # {% checkbox %}
   checkbox:
     interactive: false # enable interactive for user
+  # {% quot %}
+  quot:
+    default: # 可以自行配置多种图标方案
+      prefix: https://s2.loli.net/2022/01/04/vsTB5pGrIHfPxSj.png
+      suffix: https://s2.loli.net/2022/01/04/NORdtjlAhifZSns.png
+    hashtag:
+      prefix: https://s2.loli.net/2022/01/04/UvHcsa73jQPnobq.png
+  # {% emoji %}
   emoji:
     default: https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/qq/%s.gif
     twemoji: https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/%s.svg
@@ -193,9 +201,6 @@ plugins:
   # jquery
   jquery: https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js
 
-  ## lazyload plugins ##
-  # fancybox
-  fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css
   # swiper
   swiper:
     enable: true
@@ -228,6 +233,17 @@ plugins:
     duration: 500 # ms
     interval: 100 # ms
     scale: 1 # 0.1~1
+  
+  # https://fancyapps.com/docs/ui/fancybox/
+  fancybox:
+    enable: #true
+    js: https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js
+    css: https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css
+    comment: 
+     enable: #true # 是否处理评论区的图片，注意：不支持 iframe 类评论系统
+     selector:     # 评论区图片选择器，例：
+                   # valine: .vcontent img:not(.vemoji)
+                   # twikoo: .tk-content img:not([class*="emo"]) 
 
 style:
   darkmode: auto # auto / always / false
