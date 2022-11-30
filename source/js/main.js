@@ -1,4 +1,4 @@
-console.log('hexo-theme-stellar:\n' + stellar.github);
+console.log('\n' + '%c Stellar v' + stellar.version + ' %c\n' + stellar.github + '\n', 'color:#e8fafe;background:#03c7fa;padding:8px;border-radius:4px', 'margin-top:8px');
 // utils
 const util = {
 
@@ -92,7 +92,7 @@ const init = {
     stellar.jQuery(() => {
       const scrollOffset = 32;
       var segs = [];
-      $("article.md :header").each(function (idx, node) {
+      $("article.md-text :header").each(function (idx, node) {
         segs.push(node)
       });
       // 滚动
@@ -111,12 +111,12 @@ const init = {
           }
         }
         if (topSeg) {
-          $("#toc a.toc-link").removeClass("active")
+          $(".toc#toc a.toc-link").removeClass("active")
           var link = "#" + topSeg.attr("id")
           if (link != '#undefined') {
-            $('#toc a.toc-link[href="' + encodeURI(link) + '"]').addClass("active")
+            $('.toc#toc a.toc-link[href="' + encodeURI(link) + '"]').addClass("active")
           } else {
-            $('#toc a.toc-link:first').addClass("active")
+            $('.toc#toc a.toc-link:first').addClass("active")
           }
         }
       })
@@ -124,7 +124,7 @@ const init = {
   },
   sidebar: () => {
     stellar.jQuery(() => {
-      $("#toc a.toc-link").click(function (e) {
+      $(".toc#toc a.toc-link").click(function (e) {
         l_body.classList.remove("sidebar");
       });
     })
@@ -209,25 +209,29 @@ if (stellar.plugins.lazyload) {
     false
   );
   document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
+    window.lazyLoadInstance?.update();
   });
 }
 
-// issuesjs
-if (stellar.plugins.sitesjs) {
-  const issues_api = document.getElementById('sites-api');
-  if (issues_api != undefined) {
-    stellar.jQuery(() => {
-      stellar.loadScript(stellar.plugins.sitesjs, { defer: true })
-    })
-  }
-}
-if (stellar.plugins.friendsjs) {
-  const issues_api = document.getElementById('friends-api');
-  if (issues_api != undefined) {
-    stellar.jQuery(() => {
-      stellar.loadScript(stellar.plugins.friendsjs, { defer: true })
-    })
+// stellar js
+if (stellar.plugins.stellar) {
+  for (let key of Object.keys(stellar.plugins.stellar)) {
+    let js = stellar.plugins.stellar[key];
+    if (key == 'linkcard') {
+      stellar.loadScript(js, { defer: true }).then(function () {
+        setCardLink(document.querySelectorAll('a.link-card[cardlink]'));
+      });
+    } else {
+      const els = document.getElementsByClassName('stellar-' + key + '-api');
+      if (els != undefined && els.length > 0) {
+        stellar.jQuery(() => {
+          stellar.loadScript(js, { defer: true });
+          if (key == 'timeline') {
+            stellar.loadScript(stellar.plugins.marked);
+          }
+        })
+      }
+    }
   }
 }
 
@@ -296,6 +300,42 @@ if (stellar.plugins.fancybox) {
     })
   }
 }
+
+
+if (stellar.search.service) {
+  if (stellar.search.service == 'local_search') {
+    stellar.jQuery(() => {
+      stellar.loadScript('/js/search/local-search.js', { defer: true }).then(function () {
+        var $inputArea = $("input#search-input");
+        var $resultArea = document.querySelector("div#search-result");
+        $inputArea.focus(function() {
+          var path = stellar.search[stellar.search.service]?.path || '/search.json';
+          if (!path.startsWith('/')) {
+            path = '/' + path;
+          }
+          const filter = $inputArea.attr('data-filter') || '';
+          searchFunc(path, filter, 'search-input', 'search-result');
+        });
+        $inputArea.keydown(function(e) {
+          if (e.which == 13) {
+            e.preventDefault();
+          }
+        });
+        var observer = new MutationObserver(function(mutationsList, observer) {
+          if (mutationsList.length == 1) {
+            if (mutationsList[0].addedNodes.length) {
+              $('.search-wrapper').removeClass('noresult');
+            } else if (mutationsList[0].removedNodes.length) {
+              $('.search-wrapper').addClass('noresult');
+            }
+          }
+        });
+        observer.observe($resultArea, { childList: true });
+      });
+    })
+  }
+}
+
 
 // heti
 if (stellar.plugins.heti) {

@@ -1,11 +1,14 @@
-article.md
+.md-text
   max-width: 100%
-  padding: 1rem
+  padding: 0 1rem
+  margin-top: 1rem
+  &:first-child
+    margin-top: 0
   color: var(--text-p1)
   line-height: 1.7
   word-break: break-word
 
-article.md.excerpt
+.md-text.excerpt
   p
     font-size: $fs-14
     margin: 1em 0
@@ -16,7 +19,7 @@ h1.article-title
   line-height: 1.2
   color: var(--text-p0)
 
-article.md.content
+.md-text.content
   position: relative
   margin-bottom: 2rem
   display: flex
@@ -24,15 +27,17 @@ article.md.content
   &.indent
     >p:not([class])
       text-indent: 'calc(%s * 2)' % $fs-p
-      text-align: justify
+      text-align: convert(hexo-config('style.text-align'))
+      a
+        text-indent: 0
     h1,h2,h3,h4,h5,h6
       text-align: center
     >h2:not([class])
       align-self: center
       border-bottom-style: dashed
-      border-bottom-color: $color-highlight
-  >:first-child
-    margin-top: 1rem
+      border-bottom-color: $color-accent
+  >:first-child:not(h1)
+    margin-top: 0
   h1:not(:first-child)
     margin-top: 2em
   h2:first-child
@@ -48,7 +53,7 @@ article.md.content
 
 
 
-.md
+.md-text
   ul:not(:last-child),
   ol:not(:last-child)
     padding-bottom: .5rem
@@ -60,20 +65,17 @@ article.md.content
   p,blockquote,.tag-plugin,ul,ol,.highlight,table
     *
       --gap-p: .5rem
-  p,>ul:not(:last-child),>ol:not(:last-child)
+  p,ul,ol
     margin-top: 'calc(%s - 4px)' % var(--gap-p)
     margin-bottom: 'calc(%s - 4px)' % var(--gap-p)
   .tag-plugin,iframe
     margin-top: var(--gap-p)
     margin-bottom: var(--gap-p)
-  p,.tag-plugin
-    .highlight,table
-      --gap-p: 1rem
   iframe
     display: block
 
 // titles
-article.md.content
+.md-text.content
   a.headerlink:before
     opacity: 0
     content: '#'
@@ -99,33 +101,51 @@ article.md.content
   h5+h6
     margin-top: -0.5rem
 
-article.md p
+.md-text p
   font-size: $fs-p
 
-article.md pre
+.md-text pre
   -webkit-font-smoothing: auto
   -moz-osx-font-smoothing: auto
 
-article.md
+.md-text
   .center
     align-self: center
 
 // div
-article.md>div
+.md-text>div
   margin: var(--gap-p) 0
-// blockquote
-article.md blockquote
-  margin-left: 0
-  margin-right: 0
-  padding: 1rem
-  background: var(--card)
-  border-left: 6px solid $color-theme
-  border-radius: $border-block
-  color: var(--text-p2)
-  box-shadow: $boxshadow-card
 
 
-article.md img
+.md-text img
   border-radius: $border-image
   margin: auto
   display: block
+
+.md-text 
+  p:not([class]), li:not([class])
+    a:not([class])
+      position: relative
+      padding: 2px 0
+      text-decoration: none
+      line-height: 1.2
+      &:after
+        content: ''
+        position: absolute
+        border-radius: 2px
+        bottom: 0
+        left: 0
+        right: 0
+        height: 1px
+        opacity: 0.8
+        background: var(--theme-link)
+        trans1: all
+      &:hover
+        border-bottom: none
+        color: var(--theme-link)
+        &:after
+          height: 100%
+          opacity: 0.2
+          bottom: 0
+          left: -2px
+          right: -2px

@@ -15,11 +15,7 @@ function layoutToc() {
 function layoutTocHeader(title) {
   var el = '';
   el += '<div class="widget-header cap dis-select">';
-  if (title) {
-    el += '<span class="name">' + title + '</span>';
-  } else {
-    el += '<span class="name">' + __("meta.toc") + '</span>';
-  }
+  el += '<span class="name">' + (title || page.title || __("meta.toc")) + '</span>';
   el += '</div>';
   return el;
 }
@@ -33,7 +29,11 @@ function layoutDocTree(pages) {
     }
     el += '<div class="doc-tree' + isActive + '">';
     if (proj.pages.length > 1) {
-      el += '<a class="doc-tree-link' + isActive + '" href="' + url_for(p.path) + '">';
+      let href = url_for(p.path);
+      if (p.is_homepage) {
+        href += '#start'
+      }
+      el += '<a class="doc-tree-link' + isActive + '" href="' + href + '">';
       el += '<span class="toc-text">' + (p.title || p.seo_title) + '</span>';
       el += '</a>';
     }
@@ -63,7 +63,7 @@ function layoutDiv(fallback) {
 
   var el = '';
   if (type.length > 0) {
-    el += '<div class="widget-wrap ' + type + '" id="toc">';
+    el += '<widget class="widget-wrapper toc ' + type + '" id="toc">';
     if (page.layout !== 'wiki') {
       // post 布局
       el += layoutTocHeader(page.toc_title);
@@ -90,9 +90,9 @@ function layoutDiv(fallback) {
         el += '</div>';
       }
     }
-    el += '</div>';
+    el += '</widget>';
   } else if (item.fallback) {
-    el += partial(item.fallback, {item: theme.sidebar.widgets[item.fallback]});
+    el += partial(item.fallback, {item: theme.data.widgets[item.fallback]});
   }
   return el;
 }

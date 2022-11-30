@@ -1,8 +1,8 @@
 <%
 function layoutDiv() {
-  var el = '<div class="widget-wrap" id="recent">';
+  var el = '<widget class="widget-wrapper recent">';
   // header
-  el += '<div class="widget-header cap dis-select">';
+  el += '<div class="widget-header cap theme dis-select">';
   el += '<span class="name">' + __("meta.recent_update") + '</span>';
   if (item.rss) {
     el += '<a class="cap-action" id="rss" title="Subscribe" href="' + item.rss + '">';
@@ -13,39 +13,37 @@ function layoutDiv() {
   // body
   var arr = [];
   if (page.menu_id == 'wiki') {
-    arr = theme.wiki.all_pages.filter(function(p){
+    arr = theme.wiki.all_pages.filter( p => {
       if (p.wiki) {
         let proj = theme.wiki.projects[p.wiki];
         return proj.index != false;
       }
-      return false;
-    });
+      return false
+    })
+    arr = arr.sort((p1, p2) => p1.updated > p2.updated ? -1 : 1)
   } else {
-    arr = site.posts.filter(function(p){
-      return p.title && p.title.length > 0;
-    });
+    arr = site.posts.filter( p => p.title && p.title.length > 0)
+    arr = arr.sort("updated", -1)
   }
-  el += '<div class="widget-body fs14">';
-  arr.sort("updated", -1).limit(item.limit).each(function(post) {
-    el += '<div class="more-item">';
-    el += '<a class="title" href="' + url_for(post.link || post.path) + '">';
+  el += '<div class="widget-body related-posts fs14">';
+  arr.length = item.limit
+  arr.forEach(post => {
+    if (!post) { return }
+    el += '<a class="item title" href="' + url_for(post.link || post.path) + '">';
+    el += '<span class="title">'
     if (post.layout == 'wiki') {
-      el += '<span>';
       let proj = theme.wiki.projects[post.wiki];
-      if (proj && proj.title) {
-        el += proj.title + __('symbol.colon');
-      } else if (post.wiki) {
-        el += post.wiki + __('symbol.colon');
+      let name = proj?.name || post?.wiki;
+      if (name) {
+        el += '<strong>' + name + '</strong>' + '<span class="dot"></span>';
       }
-      el += '</span>';
     }
-    el += post.title || post.seo_title || post.wiki;
+    el += (post.title || post.seo_title || post.wiki) + '</span>';
     el += '</a>';
-    el += '</div>';
     el += '';
   });
   el += '</div>';
-  el += '</div>';
+  el += '</widget>';
   return el;
 }
 %>
