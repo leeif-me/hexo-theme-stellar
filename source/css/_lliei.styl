@@ -5,4 +5,16 @@
 .social-wrap
   a.social
     &:hover
-      background: linear-gradient(145deg, #333, #1c1d1d) !important
+       if hexo-config('style.darkmode') == 'auto'
+        @media (prefers-color-scheme: dark)
+          background: linear-gradient(145deg, #333, #1c1d1d) !important
+       if hexo-config('style.darkmode') == 'always'
+          background: linear-gradient(145deg, #333, #1c1d1d) !important
+
+.search-wrapper
+  .search-input
+    font-family: JetBrains Mono, 'LXGW WenKai Screen'
+
+.md-text .tag-plugin.timeline
+  &:before
+    background: #1c1d1d !important
