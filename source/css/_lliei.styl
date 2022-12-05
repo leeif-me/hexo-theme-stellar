@@ -14,7 +14,21 @@
 .search-wrapper
   .search-input
     font-family: JetBrains Mono, 'LXGW WenKai Screen'
+    background-color: var(--block) !important
 
+.tag-plugin.timeline .body
+  background: var(--block) !important
+.tag-plugin.timeline[api] .body .footer
+  background: var(--block) !important
 .md-text .tag-plugin.timeline
   &:before
-    background: #1c1d1d !important
+    background: var(--block) !important
+
+.widget-wrapper.ghuser .widget-body
+  background: var(--block) !important
+
+.follow 
+  color: #f0f6fc !important
+
+p>code:not([class]),li>code:not([class])
+  background: var(--background) !important
