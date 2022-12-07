@@ -1,19 +1,15 @@
-.widget-wrapper.ghuser
-  .buttons
-    font-family: 'LXGW WenKai Screen'
-
 .social-wrap
   a.social
     &:hover
        if hexo-config('style.darkmode') == 'auto'
         @media (prefers-color-scheme: dark)
-          background: linear-gradient(145deg, #333, #1c1d1d) !important
+          background: linear-gradient(145deg, #333, var(--card)) !important
        if hexo-config('style.darkmode') == 'always'
-          background: linear-gradient(145deg, #333, #1c1d1d) !important
+          background: linear-gradient(145deg, #333, var(--card)) !important
 
 .search-wrapper
   .search-input
-    font-family: JetBrains Mono, 'LXGW WenKai Screen'
+    font-family: hexo-config('style.font-family.body')
     background-color: var(--block) !important
 
 .tag-plugin.timeline .body
@@ -32,3 +28,10 @@
 
 p>code:not([class]),li>code:not([class])
   background: var(--background) !important
+
+:not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon) 
+  if hexo-config('style.darkmode') == 'auto'
+    @media (prefers-color-scheme: dark)
+      -webkit-text-stroke: 0.2px !important;
+  if hexo-config('style.darkmode') == 'always'
+      -webkit-text-stroke: 0.2px !important;
