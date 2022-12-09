@@ -9,7 +9,7 @@
 
 .search-wrapper
   .search-input
-    font-family: hexo-config('style.font-family.body')
+    font-family: convert(hexo-config('style.font-family.body'))
     background-color: var(--block) !important
 
 .tag-plugin.timeline .body
@@ -24,7 +24,7 @@
   background: var(--block) !important
 
 .follow 
-  color: #f0f6fc !important
+  color: #FFF !important
 
 p>code:not([class]),li>code:not([class])
   background: var(--background) !important
@@ -35,3 +35,10 @@ p>code:not([class]),li>code:not([class])
       -webkit-text-stroke: 0.2px !important;
   if hexo-config('style.darkmode') == 'always'
       -webkit-text-stroke: 0.2px !important;
+
+pre
+  font-family: Fira Code, Cascadia Code, Monda, system-ui !important;
+
+.cap
+  &.theme
+    color: $color-theme !important;
