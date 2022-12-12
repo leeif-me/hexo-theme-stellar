@@ -1,6 +1,6 @@
 .related-wrap
-  padding: 1rem
-  margin: 2rem 0
+  padding: 0 1rem
+  margin: 4rem 0
   &:empty
     display: none
   section.header
@@ -17,7 +17,8 @@
     border-radius: $border-block
     color: var(--text-p1)
 
-
+article.md-text.content+.related-wrap
+  margin-top: 0
 
 .related-posts
   max-width: 100%
@@ -82,7 +83,8 @@
 
 
 .related-wrap#comments
-  div.cmt-title
+  padding: 0 1rem
+  .cmt-title
     p
       margin: 0
       font-size: inherit
@@ -93,7 +95,7 @@
           color: $color-hover
         &:before
           display: none
-  div.cmt-body
+  .cmt-body
     min-height: 150px
     position: relative
     svg.loading
