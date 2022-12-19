@@ -15,11 +15,6 @@
        if hexo-config('style.darkmode') == 'always'
           background: linear-gradient(145deg, #333, var(--card)) !important
 
-.search-wrapper
-  .search-input
-    font-family: convert(hexo-config('style.font-family.body'))
-    background-color: var(--block) !important
-
 .tag-plugin.timeline .body
   background: var(--block) !important
 .tag-plugin.timeline[api] .body .footer
@@ -44,21 +39,9 @@ p>code:not([class]),li>code:not([class])
   if hexo-config('style.darkmode') == 'always'
       -webkit-text-stroke: 0.2px !important;
 
-pre
-  font-family: Fira Code, Cascadia Code, Monda, system-ui !important;
-
 pre:not([class]):has(>code)
   border: 2px solid var(--block-border);
 
 .cap
   &.theme
     color: $color-theme !important;
-
-.widget-wrapper .search-icon
-  margin-top: 1.1rem !important;
-  margin-left: 0.8rem !important;
-  color: #555 !important;
-
-svg.icon
-  width: 0.9rem !important;
-  height: 0.9rem !important;
