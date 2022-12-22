@@ -174,15 +174,16 @@ table:not([class])
 
 
 
-$hl-keyword = #8959a8
-$hl-blue = #1E80F0
-$hl-cyan = #17AFCA
-$hl-green = #3FA33F
-$hl-light-blue = #6ECDF9
-$hl-red = #EE2B29
-$hl-orange = #FB3F1B
-$hl-amber = #FD8607
-$hl-text = var(--text-p1)
+$hl-keyword = #4d9375
+$hl-blue = #83A598
+$hl-cyan = #9CA761
+$hl-green = #8EC07C
+$hl-light-blue = #83A598
+$hl-red = #D64A4A
+$hl-orange = #FABD2F
+$hl-amber = #DFCDA0
+$hl-text = var(--text-p2)
+//$hl-text = #8b949e
 .code>pre
   .code:before
     display: none
@@ -202,7 +203,7 @@ $hl-text = var(--text-p1)
     width: 100%
 
   .title, .attr, .attribute
-    color: $color-md-indigo
+    color: #8EC07C
 
   // 注释
   .comment
@@ -213,7 +214,7 @@ $hl-text = var(--text-p1)
     color: $hl-keyword
 
   .type, .built_in, .tag .name
-    color: $color-md-blue
+    color: #b8a965
 
   .variable, .regexp, .ruby .constant, .xml .tag .title, .xml .pi, .xml .doctype, .html .doctype, .css .id, .css .class, .css .pseudo
     color: $hl-amber
@@ -222,13 +223,13 @@ $hl-text = var(--text-p1)
     color: $hl-amber
 
   .class, .ruby .class .title, .css .rules .attribute
-    color: $color-md-orange
+    color: #b8a965
 
   .string, .meta-string
-    color: darken($color-md-green, 10%)
+    color: #c98a7d
 
   .value, .inheritance, .header, .ruby .symbol, .xml .cdata
-    color: $color-md-green
+    color: #8EC07C
 
   .css .hexcolor
     color: #66cccc
@@ -244,7 +245,7 @@ $hl-text = var(--text-p1)
     .selector-class, .selector-attr
       color: $hl-amber
     .attribute
-      color: $color-md-indigo
+      color: #8EC07C
     .number
       color: $hl-cyan
 
@@ -261,7 +262,7 @@ $hl-text = var(--text-p1)
     .attr
       color: #E24F5A
     .literal
-      color: $color-md-indigo
+      color: #8EC07C
 
 .highlight.yaml
   .line

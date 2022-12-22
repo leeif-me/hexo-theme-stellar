@@ -1,19 +1,42 @@
-:root
-  --site-bg: #0D1117 !important
-  --card: #010409  !important
-  --block: #161b22 !important
-  --block-lighten: #010409 !important
-  --text-p0: #ffffdc !important
-  --block-border: #222a35 !important
+if hexo-config('style.darkmode') == 'auto'
+  @media (prefers-color-scheme: dark)
+    :root
+      --site-bg: #0D1117 !important
+      --card: #010409  !important
+      --block: #161b22 !important
+      --block-lighten: #010409 !important
+      --text-p0: #ffffdc !important
+      --block-border: #222a35 !important
+    .follow 
+       color: #FFF !important
+    .social-wrap
+      a.social
+        &:hover
+          background: linear-gradient(145deg, #333, var(--card)) !important
+    :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
+      -webkit-text-stroke: 0.2px !important
+  @media (prefers-color-scheme: light)
+    .follow 
+      color: #ffffdc !important
+    :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
+      -webkit-text-stroke: 0.1px !important;
 
-.social-wrap
-  a.social
-    &:hover
-       if hexo-config('style.darkmode') == 'auto'
-        @media (prefers-color-scheme: dark)
-          background: linear-gradient(145deg, #333, var(--card)) !important
-       if hexo-config('style.darkmode') == 'always'
-          background: linear-gradient(145deg, #333, var(--card)) !important
+if hexo-config('style.darkmode') == 'always'
+  :root
+    --site-bg: #0D1117 !important
+    --card: #010409  !important
+    --block: #161b22 !important
+    --block-lighten: #010409 !important
+    --text-p0: #ffffdc !important
+    --block-border: #222a35 !important
+  .follow 
+    color: #FFF !important
+  .social-wrap
+    a.social
+      &:hover
+        background: linear-gradient(145deg, #333, var(--card)) !important
+  :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
+      -webkit-text-stroke: 0.2px !important;
 
 .tag-plugin.timeline .body
   background: var(--block) !important
@@ -26,22 +49,27 @@
 .widget-wrapper.ghuser .widget-body
   background: var(--block) !important
 
-.follow 
-  color: #FFF !important
-
 p>code:not([class]),li>code:not([class])
   background: var(--background) !important
-
-:not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon) 
-  if hexo-config('style.darkmode') == 'auto'
-    @media (prefers-color-scheme: dark)
-      -webkit-text-stroke: 0.2px !important;
-  if hexo-config('style.darkmode') == 'always'
-      -webkit-text-stroke: 0.2px !important;
-
 pre:not([class]):has(>code)
   border: 2px solid var(--block-border);
 
 .cap
   &.theme
     color: $color-theme !important;
+
+$c-red1 = #D64A4A
+$c-orange1 = #FA6400
+$c-yellow1 = #FABD2F
+$c-green1 = #8EC07C
+$c-cyan1 = #9CA761
+$c-blue1 = #83A598
+$c-purple1 = #D3869B
+
+$c-red = #EB1D36
+$c-orange = #FF6D28
+$c-yellow = #FCE700
+$c-green = #92FE9D
+$c-cyan = #3EECFF
+$c-blue = #1f6feb
+$c-purple = #810CA8
