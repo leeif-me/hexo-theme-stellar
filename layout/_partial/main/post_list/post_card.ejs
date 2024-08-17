@@ -46,12 +46,12 @@ function div_default() {
 
   // 标题
   el += '<h2 class="post-title">';
-  el += (post.title || post.seo_title) ? (post.title || post.seo_title) : date(post.date, config.date_format);
+  el += post.title ? post.title : date(post.date, config.date_format);
   el += '</h2>';
 
   // 摘要
   el += '<div class="excerpt';
-  if (theme.plugins.heti && theme.plugins.heti.enable) {
+  if (theme.plugins.heti?.enable) {
     el += ' heti';
   }
   el += '">';
@@ -68,9 +68,10 @@ function div_default() {
 
   // meta
   el += '<div class="meta cap">';
-  // time
   el += '<span class="cap" id="post-meta">';
-  el += __("meta.created") + '&nbsp;' + '<time datetime="' + date_xml(post.date) + '">' + date(post.date, config.date_format) + '</time>';
+  el += icon('default:calendar')
+  // time
+  el += `<time datetime="${date_xml(post.date)}">${date(post.date, config.date_format)}</time>`
   el += '</span>';
   // cat
   if (post.categories && post.categories.length > 0) {
@@ -84,13 +85,14 @@ function div_default() {
       if (cats.length > 0) {
         let cat = cats.shift();
         el += '<span class="cap breadcrumb"' + category_color(cat) + '>';
-        el += cat;
+        el += icon('default:category')
+        el += `<span>${cat}</span>`
         el += '</span>';
       }
     }
   }
-  if (post.pin) {
-    el += '<span class="pin"><img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/badge/3279dd441df8b.svg"/></span>';
+  if (post.sticky) {
+    el += `<span class="pin">${icon('default:pin')}</span>`
   }
   el += '</div>';
   el += '</article>';

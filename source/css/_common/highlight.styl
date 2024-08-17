@@ -12,7 +12,7 @@ p>code:not([class]),li>code:not([class])
 
 .md-text .highlight, pre:not([class]):has(>code)
   margin: var(--gap-p) 0
-  border-radius: $border-block
+  border-radius: $border-card
   overflow: hidden
   background: var(--block)
   line-height: 1.5
@@ -34,8 +34,8 @@ p>code:not([class]),li>code:not([class])
     span
       padding: 4px 0.5rem
       display: block
-      border-bottom-left-radius: $border-bar
-      border-bottom-right-radius: $border-bar
+      border-bottom-left-radius: $border-button
+      border-bottom-right-radius: $border-button
       background: var(--block-hover)
   >table
     overflow: auto
@@ -77,16 +77,20 @@ p>code:not([class]),li>code:not([class])
 .md-text .gist 
   .gist-file 
     border: 1px solid var(--block-border)
-    border-radius: $border-block
+    border-radius: $border-card
+    overflow: hidden
   .gist-data
     border-bottom: 1px solid var(--block-border)
   .highlight
     display: inherit
     border: none
     border-radius: 0
-    background: none
+    background: var(--block)
     margin: 0
     padding: 1em 0
+  .blob-code-inner
+    color: var(--text-p1)
+    font-family: $ff-codeblock
   .gist-meta
     background: var(--block-border)
 
@@ -100,7 +104,7 @@ table:not([class])
     color: var(--text-p3)
   >.hljs
     padding: 1rem
-    border-radius: $border-block
+    border-radius: $border-card
     line-height: 1.5
     box-sizing: border-box
 
@@ -171,6 +175,8 @@ table:not([class])
     content: "Go"
   &.typescript .code:before,&.ts .code:before
     content: "TS"
+  &.matlab .code:before
+    content: "MATLAB"
 
 
 

@@ -19,12 +19,12 @@ module.exports = ctx => function(args) {
   }
   var el = ''
   // header
-  el += '<div class="tag-plugin note"'
+  el += '<div class="tag-plugin colorful note"'
   el += ' ' + ctx.args.joinTags(args, ['color', 'child']).join(' ')
   el += '>'
   // title
   if (title && title.length > 0) {
-    el += '<div class="title">' + title + '</div>'
+    el += `<div class="title">${title}</div>`
   }
   // content
   el += '<div class="body">'
