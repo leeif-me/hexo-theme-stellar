@@ -102,36 +102,75 @@ function layoutWidgets() {
   return el;
 }
 function layoutFooterDiv() {
-  const { social } = theme.footer
-  if (social == null) {
+  const { social, largesocial } = theme.footer
+  if (social == null && largesocial == null) {
     return ''
   }
   var el = '<footer class="footer dis-select">';
-  el += '<div class="social-wrap">';
-  for (let id of Object.keys(social)) {
-    let item = social[id];
-    if (item.icon && (item.url || item.onclick)) {
-      el += '<a class="social"';
-      if (item.title) {
-        el += ' title="' + item.title + '"';
-      }
-      if (item.url) {
-        el += ' href="' + url_for(item.url) + '"';
-        if (item.url.includes('://')) {
-          el += ' target="_blank" rel="external nofollow noopener noreferrer"';
-        } else {
-          el += ' rel="noopener noreferrer"';
+  if (social) {
+    el += '<div class="social-wrap">';
+    for (let id of Object.keys(social)) {
+      let item = social[id];
+      if (item.icon && (item.url || item.onclick)) {
+        el += '<a class="social"';
+        if (item.title) {
+          el += ' title="' + item.title + '"';
         }
-      } else if (item.onclick) {
-        item.onclick = item.onclick.replace(/"|\'/g, '&quot;');
-        el += ' onclick="' + item.onclick + '"';
+        if (item.url) {
+          el += ' href="' + url_for(item.url) + '"';
+          if (item.url.includes('://')) {
+            el += ' target="_blank" rel="external nofollow noopener noreferrer"';
+          } else {
+            el += ' rel="noopener noreferrer"';
+          }
+        } else if (item.onclick) {
+          item.onclick = item.onclick.replace(/"|\'/g, '&quot;');
+          el += ' onclick="' + item.onclick + '"';
+        }
+        el += '>';
+        el += icon(item.icon, 'no-lazy')
+        el += '</a>';
       }
-      el += '>';
-      el += icon(item.icon, 'no-lazy')
-      el += '</a>';
     }
+    el += '</div>';
   }
-  el += '</div>';
+  if (largesocial) {
+    el += '<div class="large-social-wrap">';
+    for (let id of Object.keys(largesocial)) {
+      let item = largesocial[id];
+      if (item.icon && (item.url || item.onclick)) {
+        el += '<a class="large-social"';
+        if (item.title) {
+          el += ' title="' + item.title + '"';
+          // el += ' title="' + __(md_text(item.title)) + '"';
+        }
+        if (item.url) {
+          el += ' href="' + item.url + '"';
+          // el += ' href="' + url_for(item.url) + '"';
+          if (item.url.includes('://')) {
+            el += ' target="_blank" rel="external nofollow noopener noreferrer"';
+          } else {
+            el += ' rel="noopener noreferrer"';
+          }
+        } else if (item.onclick) {
+          item.onclick = item.onclick.replace(/"|\'/g, '&quot;');
+          el += ' onclick="' + item.onclick + '"';
+        }
+        el += '>';
+        el += '<div>';
+        el += icon(item.icon, 'no-lazy');
+        if (item.description) {
+          el += '<span class="description">';
+          el += item.description;
+          // el += __(md_text(item.description));
+          el += '</span>';
+        }
+        el += '</div>';
+        el += '</a>';
+      }
+    }
+    el += '</div>';
+  }
   el += '</footer>';
   return el;
 }

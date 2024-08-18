@@ -180,15 +180,14 @@ table:not([class])
 
 
 
-$hl-keyword = #4d9375
-$hl-blue = #83A598
-$hl-cyan = #9CA761
-$hl-green = #8EC07C
-$hl-light-blue = #83A598
-$hl-red = #D64A4A
-$hl-orange = #FABD2F
-$hl-amber = #DFCDA0
-//$hl-text = #8b949e
+$hl-keyword = #8959a8
+$hl-blue = #1E80F0
+$hl-cyan = #17AFCA
+$hl-green = #3FA33F
+$hl-light-blue = #6ECDF9
+$hl-red = #EE2B29
+$hl-orange = #FB3F1B
+$hl-amber = #FD8607
 $hl-text = var(--text-p1)
 .code>pre
   .code:before
@@ -209,7 +208,7 @@ $hl-text = var(--text-p1)
     width: 100%
 
   .title, .attr, .attribute
-    color: #8EC07C
+    color: $color-md-indigo
 
   // 注释
   .comment
@@ -220,7 +219,7 @@ $hl-text = var(--text-p1)
     color: $hl-keyword
 
   .type, .built_in, .tag .name
-    color: #b8a965
+    color: $color-md-blue
 
   .variable, .regexp, .ruby .constant, .xml .tag .title, .xml .pi, .xml .doctype, .html .doctype, .css .id, .css .class, .css .pseudo
     color: $hl-amber
@@ -229,13 +228,13 @@ $hl-text = var(--text-p1)
     color: $hl-amber
 
   .class, .ruby .class .title, .css .rules .attribute
-    color: #b8a965
+    color: $color-md-orange
 
   .string, .meta-string
-    color: #c98a7d
+    color: darken($color-md-green, 10%)
 
   .value, .inheritance, .header, .ruby .symbol, .xml .cdata
-    color: #8EC07C
+    color: $color-md-green
 
   .css .hexcolor
     color: #66cccc
@@ -251,7 +250,7 @@ $hl-text = var(--text-p1)
     .selector-class, .selector-attr
       color: $hl-amber
     .attribute
-      color: #8EC07C
+      color: $color-md-indigo
     .number
       color: $hl-cyan
 
@@ -268,7 +267,7 @@ $hl-text = var(--text-p1)
     .attr
       color: #E24F5A
     .literal
-      color: #8EC07C
+      color: $color-md-indigo
 
 .highlight.yaml
   .line

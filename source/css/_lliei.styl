@@ -1,3 +1,11 @@
+$c-red = #EB1D36
+$c-orange = #FF6D28
+$c-yellow = #FCE700
+$c-green = #92FE9D
+$c-cyan = #3EECFF
+$c-blue = #1F6FEB
+$c-purple = #9c27b0
+
 if hexo-config('style.darkmode') == 'auto'
   @media (prefers-color-scheme: dark)
     :root
@@ -54,22 +62,76 @@ p>code:not([class]),li>code:not([class])
 pre:not([class]):has(>code)
   border: 2px solid var(--block-border);
 
-.cap
-  &.theme
-    color: $color-theme !important;
 
-$c-red1 = #D64A4A
-$c-orange1 = #FA6400
-$c-yellow1 = #FABD2F
-$c-green1 = #8EC07C
-$c-cyan1 = #9CA761
-$c-blue1 = #83A598
-$c-purple1 = #D3869B
+/*********** footer **************/
+.social-wrap
+  padding-bottom: 10px
+  .social
+    img
+      if hexo-config('style.prefers_theme') == 'auto'
+        @media (prefers-color-scheme: dark)
+          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+      if hexo-config('style.prefers_theme') == 'always'
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 
-$c-red = #EB1D36
-$c-orange = #FF6D28
-$c-yellow = #FCE700
-$c-green = #92FE9D
-$c-cyan = #3EECFF
-$c-blue = #1F6FEB
-$c-purple = #FF1FE0
+.large-social-wrap
+  grid-gap: 0.25rem 0.25rem
+  grid-template-columns: repeat(auto-fill, 32px)
+  .large-social
+    font-size: 0.9rem
+    height: 1.2em
+    line-height: 0
+    display: block
+    padding: 6px
+    border-radius: 32px
+    overflow: hidden
+    background: transparent
+    trans3: box-shadow background transform
+    filter: grayscale(100%)
+    &:hover
+      z-index: 1
+      filter: unset
+      background: var(--alpha100)
+    img
+      display: inline-block
+      height: 1.2em
+      width: 1.2em
+      border-radius: 2px
+      if hexo-config('style.prefers_theme') == 'auto'
+        @media (prefers-color-scheme: dark)
+          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+      if hexo-config('style.prefers_theme') == 'always'
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    span
+      display: inline-block
+      height: 0.6em
+      vertical-align: middle
+      color: var(--text-p1)
+      margin-left: 0.5em
+
+/*********** code **************/
+// code 代码块仿 mac
+td
+  pre
+    &::before
+      content ""
+      height 16px
+      display block
+    &::after
+      content " "
+      position absolute
+      border-radius 50%
+      background #ff5f56
+      width 12px
+      height 12px
+      top 0
+      left 12px
+      margin-top 12px
+      -webkit-box-shadow 20px 0 #ffbd2e, 40px 0 #27c93f
+      box-shadow 20px 0 #ffbd2e, 40px 0 #27c93f
+
+/*********** highlight **************/
+.md-text .highlight
+  figcaption
+    span
+      padding: 5px 5rem !important
