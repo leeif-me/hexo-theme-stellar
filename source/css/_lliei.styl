@@ -6,46 +6,38 @@ $c-cyan = #3EECFF
 $c-blue = #1F6FEB
 $c-purple = #9c27b0
 
-if hexo-config('style.darkmode') == 'auto'
-  @media (prefers-color-scheme: dark)
-    :root
-      --site-bg: #0D1117 !important
-      --card: #010409  !important
-      --block: #161b22 !important
-      --block-lighten: #010409 !important
-      --text-p0: #ffffdc !important
-      --block-border: #222a35 !important
-    .follow 
-       color: #FFF !important
-    .social-wrap
-      a.social
-        &:hover
-          background: linear-gradient(145deg, #333, var(--card)) !important
-    :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
-      -webkit-text-stroke: 0.2px !important
-  @media (prefers-color-scheme: light)
-    .follow 
-      color: #ffffdc !important
-    :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
-      -webkit-text-stroke: 0.1px !important;
-
-if hexo-config('style.darkmode') == 'always'
-  :root
-    --site-bg: #0D1117 !important
-    --card: #010409  !important
-    --block: #161b22 !important
-    --block-lighten: #010409 !important
-    --text-p0: #ffffdc !important
-    --block-border: #222a35 !important
-  .follow 
-    color: #FFF !important
+_common_dark_theme_custom()
+  --site-bg: #0D1117 !important
+  --card: #010409  !important
+  --block: #161b22 !important
+  --text: #ffffdc !important
+  --text-p1: #ffffdc !important
+  --text-p2: #ffffdc !important
+  --text-p3: #ffffdc !important
+  --text-p4: #ffffdc !important
+  --block-border: #222a35 !important
   .social-wrap
-    a.social
-      &:hover
-        background: linear-gradient(145deg, #333, var(--card)) !important
-  :not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
-      -webkit-text-stroke: 0.2px !important;
+      .social
+        filter: invert(1)
+        &:hover
+          background: #fff 
 
+// 跟随系统颜色 设定
+:root:not([data-theme])
+  @media (prefers-color-scheme: dark)
+    _common_dark_theme_custom()
+  // @media (prefers-color-scheme: light)
+
+// 默认黑色主题 设定
+:root[data-theme="dark"]
+  _common_dark_theme_custom()
+
+/*********** 全局设置 **************/
+// 字体设置
+:not(pre, .far, .fa, .glyphicon, [class*="vjs-"], .fab, .fa-github, .fas, .material-icons, .icofont, .typcn, mu, [class*="mu-"], .glyphicon, .icon)
+  -webkit-text-stroke: 0.2px !important
+
+/*********** tag-plugin **************/
 .tag-plugin.timeline .body
   background: var(--block) !important
 .tag-plugin.timeline[api] .body .footer
@@ -54,25 +46,14 @@ if hexo-config('style.darkmode') == 'always'
   &:before
     background: var(--block) !important
 
-.widget-wrapper.ghuser .widget-body
-  background: var(--block) !important
-
 p>code:not([class]),li>code:not([class])
   background: var(--background) !important
 pre:not([class]):has(>code)
   border: 2px solid var(--block-border);
 
-
 /*********** footer **************/
 .social-wrap
   padding-bottom: 10px
-  .social
-    img
-      if hexo-config('style.prefers_theme') == 'auto'
-        @media (prefers-color-scheme: dark)
-          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-      if hexo-config('style.prefers_theme') == 'always'
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 
 .large-social-wrap
   grid-gap: 0.25rem 0.25rem
@@ -87,21 +68,26 @@ pre:not([class]):has(>code)
     overflow: hidden
     background: transparent
     trans3: box-shadow background transform
-    filter: grayscale(100%)
+    @media (prefers-color-scheme: dark)
+      svg
+        filter: brightness(0) invert(1)
+    @media (prefers-color-scheme: light)
+      svg
+        filter: brightness(0) 
     &:hover
       z-index: 1
-      filter: unset
+      @media (prefers-color-scheme: dark)
+        svg
+          filter: brightness(0) invert(1)
+      @media (prefers-color-scheme: light)
+        svg
+          filter: unset
       background: var(--alpha100)
     img
       display: inline-block
       height: 1.2em
       width: 1.2em
       border-radius: 2px
-      if hexo-config('style.prefers_theme') == 'auto'
-        @media (prefers-color-scheme: dark)
-          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-      if hexo-config('style.prefers_theme') == 'always'
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
     span
       display: inline-block
       height: 0.6em
@@ -130,7 +116,7 @@ td
       -webkit-box-shadow 20px 0 #ffbd2e, 40px 0 #27c93f
       box-shadow 20px 0 #ffbd2e, 40px 0 #27c93f
 
-/*********** highlight **************/
+// 代码块标题不占用 mac 图标 
 .md-text .highlight
   figcaption
     span
